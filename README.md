@@ -21,18 +21,18 @@
   ### SetUp
   - Create database
      
-```
+  ```
     python manage.py makemigrations
     python manage.py migrate
-```
+  ```
     
   - Create Admin User (username,password) required
     
-```
+  ```
     python manage.py createsuperuser
-```
+  ```
   - Open Docker
   - For Unix and Windows run the following command :
-   ```
+  ```
     docker-compose up --build
-   ```
+  ```
