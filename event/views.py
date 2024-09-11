@@ -52,8 +52,11 @@ def eventView(request,id):
 
 @api_view(["GET","POST","DELETE"])
 def registrationView(request,id):
-    if request.method == "POST":
+    try:
         event = Event.objects.get(id=id)
+    except Exception as error:
+        return Response({"error":str(error)},status=status.HTTP_400_BAD_REQUEST)
+    if request.method == "POST":
         user = request.user
         if event.available:
             if not Registration.objects.filter(event=event,user=user).exists():
@@ -71,7 +74,6 @@ def registrationView(request,id):
             return Response({"message":"sorry there are no empty places"})
         
     elif request.method == "GET":
-        event = Event.objects.get(id=id)
         user = request.user
         if Registration.objects.filter(event=event,user=user).exists():
             registration = Registration.objects.get(event=event,user=user)
@@ -80,7 +82,6 @@ def registrationView(request,id):
         else:
             return Response({"message":"you don't have registration"})
     elif request.method == "DELETE":
-        event = Event.objects.get(id=id)
         user = request.user
         if Registration.objects.filter(event=event,user=user).exists():
             registration = Registration.objects.get(event=event,user=user)
