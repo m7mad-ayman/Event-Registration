@@ -1,5 +1,5 @@
 # Event Registration API
-#### A Django Event Registration API is a backend service built using the Django restframework .
+#### A Django Event Registration API is a backend service built using the Django RestFramework .
 
 ## Tools :
 - Django
