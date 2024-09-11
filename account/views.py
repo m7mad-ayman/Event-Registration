@@ -20,7 +20,9 @@ def registerView(request):
             serial = UserSerializer(data=request.data)
             if serial.is_valid():
                 if not User.objects.filter(username = request.data['username']).exists():
-                    user=User(username = request.data["username"],email = request.data["email"],is_organizer=request.data["is_organizer"])
+                    user=User(username = request.data["username"],email = request.data["email"])
+                    if request.data.get("is_organizer"):
+                        user.is_organizer=request.data["is_organizer"]
                     if request.data['password'] == request.data['confirm']:
                         user.password = make_password(request.data["password"])
                         user.save()
